@@ -1,9 +1,9 @@
 <?php
 
-$servername = "localhost";
-$database = "sql10698770";
-$username = "root";
-$password = "";
+$servername = "127.0.0.1";
+$database = "sql10707092";
+$username = "sql10707092";
+$password = "Noah130821";
 
 $path = "http://192.168.1.77:8080/newpaneltrico/";
 
